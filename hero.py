@@ -1,6 +1,7 @@
 import random
 from ability import Ability
 from armor import Armor
+from weapon import Weapon
 
 class Hero:
     def __init__(self, name, starting_health = 100):
@@ -31,6 +32,9 @@ class Hero:
 
     def add_ability(self, ability):
         self.abilities.append(ability) # we use the append method to add ability objects to our list
+    
+    def add_weapon(self, weapon):
+        self.abilities.append(weapon)
 
     def attack(self):
         total_damage = 0 # start our total at 0
@@ -58,6 +62,27 @@ class Hero:
             return True # and are therfore alive, so return True
 
 
+# define an ability and a weapon
+# both have the same max damage
+eye_rays = Ability('Eye Rays', 50)
+laser_blast = Weapon('Laser Blast', 50)
+
+# Let's put these in an array together
+# This list contains different types: Ability and Weapon
+powers = [eye_rays, laser_blast]
+
+# We know that all Abilities and Weapons share the same attribute
+for power in powers:
+  print(power.max_damage)
+
+# We know that all Abilities and Weapns implement the attack method
+for power in powers:
+  print(power.attack())
+
+# Note! While both implement attack() a Weapon will always return 
+# a higher average damage!
+
+
 
 
 
@@ -69,18 +94,22 @@ class Hero:
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
+    hero = Hero("Wonder Woman")
+    weapon = Weapon("Lasso of Truth", 90)
+    hero.add_weapon(weapon)
+    print(hero.attack())
 
-    hero1 = Hero("Wonder Woman")
-    hero2 = Hero("Dumbledore")
-    ability1 = Ability("Super Speed", 300)
-    ability2 = Ability("Super Eyes", 130)
-    ability3 = Ability("Wizard Wand", 80)
-    ability4 = Ability("Wizard Beard", 20)
-    hero1.add_ability(ability1)
-    hero1.add_ability(ability2)
-    hero2.add_ability(ability3)
-    hero2.add_ability(ability4)
-    hero1.fight(hero2)
+    # hero1 = Hero("Wonder Woman")
+    # hero2 = Hero("Dumbledore")
+    # ability1 = Ability("Super Speed", 300)
+    # ability2 = Ability("Super Eyes", 130)
+    # ability3 = Ability("Wizard Wand", 80)
+    # ability4 = Ability("Wizard Beard", 20)
+    # hero1.add_ability(ability1)
+    # hero1.add_ability(ability2)
+    # hero2.add_ability(ability3)
+    # hero2.add_ability(ability4)
+    # hero1.fight(hero2)
 # if __name__ == "__main__":
 #   # If you run this file from the terminal
 #   # this block is executed.
