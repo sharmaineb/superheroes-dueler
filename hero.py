@@ -10,6 +10,8 @@ class Hero:
         self.name = name # we know the name of our hero, so we assign it here
         self.starting_health = starting_health # similarly, our starting health is passed in, just like name
         self.current_health = starting_health # always the same as their starting heatlh (no damage taken yet!)
+        self.deaths = 0
+        self.kills = 0
 
     def fight(self, opponent):
         if len(self.abilities) == 0 and len(opponent.abilities) == 0: # check if at least one hero has abilities. if no hero has abilites, print "Draw"
@@ -25,8 +27,12 @@ class Hero:
                         total_damage = total_damage(self.attack)
                         opponent.take_damage(total_damage)
                     else:
+                        opponent.add_kill += 1
+                        self.add_death()
                         print(f"{opponent.name} won!")
                 elif opponent.is_alive() == False: # check if one of them has died, print "heroName won!" replacing heroName with the name of the hero, and end the fight loop
+                    self.add_kill()
+                    opponent.add_death()
                     return print(f"{self.name} won!")
 
 
@@ -60,6 +66,12 @@ class Hero:
             return False
         else:
             return True # and are therfore alive, so return True
+
+    def add_kill(self, num_kills):
+        self.kills += num_kills # update self.kills by num_kills amount
+
+    def add_death(self, num_deaths):
+        self.deaths += num_deaths # add number of deaths to self.deaths
 
 
 # # define an ability and a weapon
